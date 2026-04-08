@@ -1,4 +1,4 @@
-package org.example.umc10th;
+package com.example.umc10th;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

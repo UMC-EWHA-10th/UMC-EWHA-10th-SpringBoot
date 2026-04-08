@@ -1,4 +1,4 @@
-package org.example.umc10th;
+package com.example.umc10th;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
