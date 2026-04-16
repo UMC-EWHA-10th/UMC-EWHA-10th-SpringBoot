@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="60c8851d-6447-400b-bbea-eb25cd3bcf67" name="변경" comment="프로젝트 세팅">
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/Umc10thApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/controller/MemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/converter/MemberConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/dto/MemberReqDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/dto/MemberResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/entity/Food.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/entity/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/entity/Term.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/entity/mapping/MemberFood.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/entity/mapping/MemberTerm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/enums/Gender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/enums/SocialType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/enums/Term.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/exception/MemberException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/exception/code/MemberErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/exception/code/MemberSuccessCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/repository/MemberRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/member/service/MemberService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/controller/MissionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/converter/MissionConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/dto/MissionReqDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/dto/MissionResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/entity/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/entity/Mission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/entity/Store.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/entity/mapping/MemberMission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/enums/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/exception/MissionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/exception/code/MissionErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/exception/code/MissionSuccessCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/repository/MissionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission/service/MissionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/controller/ReviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/converter/ReviewConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/dto/ReviewReqDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/dto/ReviewResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/entity/Reply.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/entity/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/entity/ReviewPhoto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/exception/ReviewException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/exception/code/ReviewErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/exception/code/ReviewSuccessCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/repository/ReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review/service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/umc10th/global/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/umc10th/Umc10thApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/yxpjseo/UMC/umc-spring" value="3BiKOGG1odE9vmTQyacBgIoAZGU" />
+    </persistenceIdMap>
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;yxpjseo&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/yxpjseo/10th-UMC-Spring.git&quot;,
+    &quot;accountId&quot;: &quot;8d59e878-e446-4c7d-a1c2-5a4e23759bdd&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3BiKOGG1odE9vmTQyacBgIoAZGU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.umc-spring 빌드.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Umc10thApplication.executor": "Run",
+    "Spring Boot.UmcSpringApplication.executor": "Run",
+    "git-widget-placeholder": "stella/week4에서 체리픽 중",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/yxpjseo/UMC/umc-spring/src/main/java/com/example/umc10th/domain/review",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.customization.CustomizationConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/review" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/example/umc10th/domain/mission" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Umc10thApplication">
+    <configuration name="Umc10thApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="umc-spring.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.umc10th.Umc10thApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Umc10thApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="dev" />
+        <env name="DB_PW" value="1234" />
+        <env name="DB_URL" value="jdbc:mysql://localhost:3306/umc10th" />
+      </envs>
+      <module name="umc-spring.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.umc10th.Umc10thApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.Umc10thApplication (1)" />
+      <item itemvalue="Spring Boot.Umc10thApplication" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="60c8851d-6447-400b-bbea-eb25cd3bcf67" name="변경" comment="" />
+      <created>1774966419461</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774966419461</updated>
+      <workItem from="1774966420581" duration="4824000" />
+      <workItem from="1775365115017" duration="263000" />
+      <workItem from="1775365399616" duration="530000" />
+    </task>
+    <task id="LOCAL-00001" summary="프로젝트 세팅">
+      <option name="closed" value="true" />
+      <created>1774970772596</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774970772596</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="프로젝트 세팅" />
+    <option name="LAST_COMMIT_MESSAGE" value="프로젝트 세팅" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
