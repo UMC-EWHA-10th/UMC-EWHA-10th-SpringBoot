@@ -1,4 +1,34 @@
 package com.example.umc10th.domain.mission.dto;
 
+import lombok.Builder;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class MissionResDto {
+
+    // 홈 화면+미션 목록 조회용 미션 목록
+    @Builder
+    public record MissionList(
+            List<Mission> missionList,
+            Long nextLastId,
+            Boolean hasMore
+    ){}
+
+    // 미션
+    @Builder
+    public record Mission(
+            Long missionId,
+            String title,
+            Integer reward,
+            String status
+    ){}
+
+    // 미션 성공 누르기
+    @Builder
+    public record CompleteMission(
+            Long missionId,
+            LocalDateTime updatedAt
+    ){}
+
 }
