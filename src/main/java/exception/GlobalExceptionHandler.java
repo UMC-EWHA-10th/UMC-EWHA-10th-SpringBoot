@@ -21,4 +21,4 @@ public class GlobalExceptionHandler {
         ApiResponse<String> response = ApiResponse.onFailure("COMMON400", "잘못된 요청입니다.", e.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
-}
+
