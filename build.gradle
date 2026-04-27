@@ -5,10 +5,8 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'tes
+version = '0.0.1-SNAPSHOT'
 description = '0426'
-
-
 
 java {
     toolchain {
@@ -30,6 +28,16 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testCompileOnly 'org.projectlombok:lombok'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+dependencies {
+    // ... 기존 코드는 건드리지 마세요 ...
+
+    // 아래 4줄을 정확하게 넣어주세요
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
