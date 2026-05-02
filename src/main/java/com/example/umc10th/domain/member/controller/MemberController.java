@@ -6,10 +6,7 @@ import com.example.umc10th.domain.member.service.MemberService;
 import com.example.umc10th.global.apiPayload.ApiResponse;
 import com.example.umc10th.global.apiPayload.code.BaseSuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +16,7 @@ public class MemberController {
     private final MemberService memberService;
 
     // 마이페이지
-    @PostMapping("/v1/users/me")
+    @GetMapping("/v1/users/me")
     public ApiResponse<MemberReqDTO.GetInfo> getInfo(
             @RequestBody MemberReqDTO.GetInfo dto)
     {

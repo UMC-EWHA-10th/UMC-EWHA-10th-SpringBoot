@@ -18,13 +18,13 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     // 리뷰 작성
-    @PostMapping("{storeId}/review")
+    @PostMapping("{storeId}/reviews")
     public ApiResponse<ReviewResDto.CreateReview> createReview(
-            @PathVariable Long StoreId,
+            @PathVariable Long storeId,
             @RequestBody ReviewReqDto.CreateReview request,
-            @AuthenticationPrincipal Member member //시큐리타가 헤더 보고 주입
+            @AuthenticationPrincipal Member member //시큐리티가 헤더 보고 주입
             ){
-        ReviewResDto.CreateReview result= ReviewService.createReview(storeId, member.getId(), request);
+        ReviewResDto.CreateReview result= reviewService.createReview(storeId, member.getId(), request);
         return ApiResponse.onSuccess(ReviewSuccessCode.REVIEW_CREATED, result);
     }
 }

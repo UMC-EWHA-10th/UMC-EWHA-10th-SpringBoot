@@ -20,7 +20,7 @@ public class AuthController {
     private final MemberService memberService;
 
     //회원가입
-    @PostMapping("/users/signup")
+    @PostMapping("/signup")
     public ApiResponse<MemberResDTO.Join> Join(
             @RequestBody MemberReqDTO.Join dto)
     {
