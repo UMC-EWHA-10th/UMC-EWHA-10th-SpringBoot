@@ -6,9 +6,6 @@ import com.example.umc10th.domain.member.enums.Gender;
 import java.util.List;
 
 public class MemberReqDTO {
-    // 정보 조회
-    public record GetInfo(Long id) {
-    }
 
     // 회원 가입
     public record Join(
