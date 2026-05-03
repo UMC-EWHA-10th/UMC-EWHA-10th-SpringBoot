@@ -12,7 +12,8 @@ public class MissionResDto {
     public record MissionList(
             List<Mission> missionList,
             Long nextLastId,
-            Boolean hasMore
+            Boolean hasMore,
+            Integer completedCount
     ){}
 
     // 미션
@@ -22,7 +23,8 @@ public class MissionResDto {
             String title,
             String content,
             Integer reward,
-            String status
+            String status,
+            String food
     ){}
 
     // 미션 성공 누르기

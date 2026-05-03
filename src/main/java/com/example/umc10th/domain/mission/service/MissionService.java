@@ -4,6 +4,7 @@ import com.example.umc10th.domain.member.entity.Member;
 import com.example.umc10th.domain.mission.converter.MissionConverter;
 import com.example.umc10th.domain.mission.dto.MissionReqDto;
 import com.example.umc10th.domain.mission.dto.MissionResDto;
+import com.example.umc10th.domain.mission.entity.Mission;
 import com.example.umc10th.domain.mission.entity.mapping.MemberMission;
 import com.example.umc10th.domain.mission.repository.MemberMissionRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,25 @@ public class MissionService {
         );
 
         //엔티티 -> Dto
-        return MissionConverter.toMissionListDto(missionPage);
+        return MissionConverter.toMemberMissionListDto(missionPage);
+    }
+
+    public MissionResDto.MissionList missionSummary(Member member, MissionReqDto.MissionSummary request) {
+        //페이지 번호/사이즈 결정
+        PageRequest pageRequest=PageRequest.of(0, request.size()!=null?request.size():10);
+
+        //도전 가능한 미션 목록 조회
+        Page<Mission> missionPage=memberMissionRepository.findHomeMissionList(
+                member,
+                request.locationId(),
+                request.lastId(),
+                pageRequest
+        );
+
+        //완료한 미션 개수 집계
+        Integer completedCount= memberMissionRepository.countCompletedMissionByLocationId(member,  request.locationId());
+
+        //엔티티 -> Dto
+        return MissionConverter.toMissionListDto(missionPage, completedCount);
     }
 }

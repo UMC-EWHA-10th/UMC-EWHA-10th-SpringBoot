@@ -23,7 +23,7 @@ public class MissionController {
         @AuthenticationPrincipal Member member,
         @ModelAttribute MissionReqDto.MissionSummary request
     ){
-        MissionResDto.MissionList result=missionService.missionSummary(member.getId(), request);
+        MissionResDto.MissionList result=missionService.missionSummary(member, request);
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_SUMMARIZED, result);
     }
