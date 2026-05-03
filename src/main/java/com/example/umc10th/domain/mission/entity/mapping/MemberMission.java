@@ -1,7 +1,7 @@
 package com.example.umc10th.domain.mission.entity.mapping;
 
 import com.example.umc10th.domain.member.entity.Member;
-import com.example.umc10th.domain.mission.entity.Store;
+import com.example.umc10th.domain.mission.entity.Mission;
 import com.example.umc10th.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,8 +25,8 @@ public class MemberMission extends BaseEntity {
     private String status;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id")

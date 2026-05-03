@@ -20,6 +20,7 @@ public class MissionResDto {
     public record Mission(
             Long missionId,
             String title,
+            String content,
             Integer reward,
             String status
     ){}
