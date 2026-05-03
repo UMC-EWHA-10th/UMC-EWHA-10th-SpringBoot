@@ -23,6 +23,7 @@ public class Location extends BaseEntity {
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Address name;
 
 }
