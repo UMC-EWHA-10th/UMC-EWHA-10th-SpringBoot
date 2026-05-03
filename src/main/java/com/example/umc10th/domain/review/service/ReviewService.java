@@ -11,6 +11,8 @@ import com.example.umc10th.domain.review.entity.Review;
 import com.example.umc10th.domain.review.entity.ReviewImage;
 import com.example.umc10th.domain.review.repository.ReviewImageRepository;
 import com.example.umc10th.domain.review.repository.ReviewRepository;
+import com.example.umc10th.global.apiPayload.code.GeneralErrorCode;
+import com.example.umc10th.global.apiPayload.exception.ProjectException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +33,9 @@ public class ReviewService {
 
         //데이터 조회
         Member member=memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("해당 회원이 존재하지 않습니다."));
+                .orElseThrow(() -> new ProjectException(GeneralErrorCode.NOT_FOUND));
         Store store=storeRepository.findById(storeId)
-                .orElseThrow(() -> new RuntimeException("해당 가게가 존재하지 않습니다."));
+                .orElseThrow(() -> new ProjectException(GeneralErrorCode.NOT_FOUND));
 
 
         //Dto -> 엔티티
