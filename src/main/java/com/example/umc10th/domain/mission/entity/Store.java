@@ -44,7 +44,5 @@ public class Store extends BaseEntity {
     @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE)
     private List<Mission> MissionList=new ArrayList<>();
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE)
-    private List<MemberMission> memberMissionList=new ArrayList<>();
 
 }
