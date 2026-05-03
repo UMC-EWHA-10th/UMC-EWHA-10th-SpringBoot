@@ -14,9 +14,6 @@ public class ReviewReqDTO {
             Long memberId,
 
             @NotNull
-            Long storeId,
-
-            @NotNull
             @DecimalMin(value = "0.0")
             @DecimalMax(value = "5.0")
             Float score,
