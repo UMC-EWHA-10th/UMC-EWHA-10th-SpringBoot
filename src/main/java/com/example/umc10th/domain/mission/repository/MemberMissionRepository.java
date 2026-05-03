@@ -13,17 +13,20 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
     @Query(value="SELECT mm FROM MemberMission mm "+
             "JOIN FETCH mm.mission m "+
             "JOIN FETCH m.store s "+
-            "WHERE mm.member=:member AND mm.status=:status ",
+            "WHERE mm.member=:member AND mm.status=:status " +
+            "AND (:cursor IS NULL OR m.id < :cursor) "+
+            "ORDER BY m.id DESC",
             countQuery = "SELECT COUNT(mm) FROM MemberMission  mm "+
                     "WHERE mm.member=:member AND mm.status=:status ")
-    Page<MemberMission> findAllByMemberAndStatus(@Param("member") Member member, @Param("status") String status, Pageable pageable);
+    Page<MemberMission> findAllByMemberAndStatus(@Param("member") Member member, @Param("status") String status, @Param("cursor") Long lastId, Pageable pageable);
 
     @Query(value= "SELECT m FROM Mission m "+
             "JOIN FETCH m.store s "+
             "LEFT JOIN MemberMission mm ON mm.mission = m AND mm.member=:member "+
             "WHERE s.location.id = :locationId "+
             "AND mm.id IS NULL " +
-            "AND m.id < :cursor",
+            "AND (:cursor IS NULL OR m.id < :cursor) "+
+            "ORDER BY m.id DESC",
             countQuery = "SELECT COUNT(m) FROM Mission m " +
                     "JOIN m.store s " +
                     "LEFT JOIN MemberMission mm ON mm.mission = m AND mm.member = :member " +

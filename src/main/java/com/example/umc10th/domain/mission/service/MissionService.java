@@ -28,6 +28,7 @@ public class MissionService {
         Page<MemberMission> missionPage=memberMissionRepository.findAllByMemberAndStatus(
                 member,
                 request.status().toString(),
+                request.lastId(),
                 pageRequest
         );
 
