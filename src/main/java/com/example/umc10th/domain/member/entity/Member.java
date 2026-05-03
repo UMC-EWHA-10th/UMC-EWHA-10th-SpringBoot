@@ -49,6 +49,23 @@ public class Member extends BaseEntity {
     @Column(name = "social_uid", nullable = false)
     private String social_uid;
 
+    @Column(name = "profile_url")
+    private String profileUrl;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "phone_number_verified", nullable = false)
+    @Builder.Default
+    private boolean phoneNumberVerified = false;
+
+    @Column(name = "point", nullable = false)
+    @Builder.Default
+    private Integer point=0;
+
     @Column(name = "social_type")
     @Enumerated(EnumType.STRING)
     private SocialType socialType;

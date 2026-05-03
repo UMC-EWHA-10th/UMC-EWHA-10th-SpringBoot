@@ -14,6 +14,7 @@ public class MemberResDTO {
             String profileUrl,
             String email,
             String phoneNumber,
+            Boolean phoneNumberVerified,
             Integer point
     ){}
 
