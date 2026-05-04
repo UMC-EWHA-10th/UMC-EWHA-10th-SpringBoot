@@ -1,4 +1,23 @@
 package com.example.umc10th.domain.mission.exception.code;
 
-public class MissionSuccessCode {
+import com.example.umc10th.global.apiPayload.code.BaseSuccessCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+
+@Getter
+@RequiredArgsConstructor
+public enum MissionSuccessCode implements BaseSuccessCode {
+
+    OK(HttpStatus.OK,
+            "MISSION200_1",
+            "미션 처리에 성공했습니다."),
+    LIST_OK(HttpStatus.OK,
+            "MISSION200_2",
+            "미션 목록 조회에 성공했습니다."),
+    ;
+
+    private final HttpStatus status;
+    private final String code;
+    private final String message;
 }
