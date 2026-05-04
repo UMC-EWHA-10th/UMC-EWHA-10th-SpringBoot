@@ -22,4 +22,12 @@ public class UserContoller {
         UserResDTO.UserInfoResponse result = userService.getUserInfo(request);
         return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, result);
     }
+    // ↓ 이거 추가!
+    @GetMapping("/my-page")
+    public ApiResponse<UserResDTO.MyPageResponse> getMyPage(
+            @RequestParam Long userId
+    ) {
+        return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS,
+                userService.getMyPage(userId));
+    }
 }
