@@ -5,6 +5,9 @@ import com.example.umc10th.domain.member.entity.Member;
 import com.example.umc10th.domain.mission.entity.Store;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +17,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "review")
 public class Review extends BaseEntity {
@@ -40,6 +45,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "reply_id", nullable = false)
     private Reply reply;
 
+    @Default
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewPhoto> reviewPhotoList = new ArrayList<>();
 }
