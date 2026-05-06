@@ -1,15 +1,15 @@
-package com.example.umc10th.domain.member.exception.code;
+package com.example.umc10th.global.apiPayload.code.status;
 
-import com.example.umc10th.global.apiPayload.code.BaseErrorCode;
+import com.example.umc10th.global.apiPayload.code.BaseCode;
 import com.example.umc10th.global.apiPayload.code.ReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum MemberErrorCode implements BaseErrorCode {
+public enum SuccessStatus implements BaseCode {
 
-    MEMBER_NOT_FOUND("MEMBER400_1", "존재하지 않는 회원입니다.");
+    _OK("COMMON200", "성공입니다.");
 
     private final String code;
     private final String message;
