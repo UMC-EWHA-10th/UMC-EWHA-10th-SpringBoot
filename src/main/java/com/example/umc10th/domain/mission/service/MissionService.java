@@ -9,6 +9,7 @@ import com.example.umc10th.domain.mission.dto.MissionReqDto;
 import com.example.umc10th.domain.mission.dto.MissionResDto;
 import com.example.umc10th.domain.mission.entity.Mission;
 import com.example.umc10th.domain.mission.entity.mapping.MemberMission;
+import com.example.umc10th.domain.mission.enums.MissionStatus;
 import com.example.umc10th.domain.mission.repository.MemberMissionRepository;
 import com.example.umc10th.domain.mission.repository.MissionRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +57,7 @@ public class MissionService {
         );
 
         //완료한 미션 개수 집계
-        Integer completedCount= memberMissionRepository.countCompletedMissionByLocationId(member,  request.locationId());
+        Integer completedCount= memberMissionRepository.countCompletedMissionByLocationId(member, MissionStatus.COMPLETED, request.locationId());
 
         //엔티티 -> Dto
         return MissionConverter.toMissionListDto(missionPage, completedCount);
@@ -74,6 +75,7 @@ public class MissionService {
         // 진행 중인 미션 조회
         Page<MemberMission> ongoingMissions=memberMissionRepository.findAllByMemberAndOngoing(
                 member,
+                MissionStatus.ONGOING,
                 pageable
         );
 
