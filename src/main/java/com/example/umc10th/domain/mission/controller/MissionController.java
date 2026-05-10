@@ -6,6 +6,7 @@ import com.example.umc10th.domain.mission.dto.MissionResDto;
 import com.example.umc10th.domain.mission.exception.code.MissionSuccessCode;
 import com.example.umc10th.domain.mission.service.MissionService;
 import com.example.umc10th.global.apiPayload.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class MissionController {
     // 진행 중인 미션 조회
     @PostMapping("/ongoing")
     public ApiResponse<MissionResDto.MissionList> getOngoingMissionList(
-           @RequestBody MissionReqDto.GetOngoingMissionList request)
+           @RequestBody @Valid MissionReqDto.GetOngoingMissionList request)
     {
         MissionResDto.MissionList result=missionService.getOngoingMissionList(request);
 

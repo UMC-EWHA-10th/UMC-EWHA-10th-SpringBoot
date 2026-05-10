@@ -5,6 +5,7 @@ import com.example.umc10th.global.apiPayload.code.BaseErrorCode;
 import com.example.umc10th.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc10th.global.apiPayload.exception.ProjectException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -26,6 +27,21 @@ public class GeneralExceptionAdvice {
                 .body(ApiResponse.onFailure(
                         code,
                         ex.getMessage()
+                ));
+    }
+
+    // @Valid 검증 실패 시 발생하는 MethodArgumentNotValidException 처리
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse<Object>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+        //에러들 중 첫 번째 에러의 메시지를 가져옴
+        String errorMessage=e.getBindingResult().getFieldError().getDefaultMessage();
+
+        BaseErrorCode code=GeneralErrorCode.BAD_REQUEST;
+
+        return ResponseEntity.status(code.getStatus())
+                .body(ApiResponse.onFailure(
+                        code,
+                        e.getMessage()
                 ));
     }
 }
