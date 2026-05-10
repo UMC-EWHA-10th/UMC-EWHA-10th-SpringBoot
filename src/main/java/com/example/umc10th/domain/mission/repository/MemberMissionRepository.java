@@ -20,18 +20,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
                     "WHERE mm.member=:member AND mm.status=:status ")
     Page<MemberMission> findAllByMemberAndStatus(@Param("member") Member member, @Param("status") String status, @Param("cursor") Long lastId, Pageable pageable);
 
-    @Query(value= "SELECT m FROM Mission m "+
-            "JOIN FETCH m.store s "+
-            "LEFT JOIN MemberMission mm ON mm.mission = m AND mm.member=:member "+
-            "WHERE s.location.id = :locationId "+
-            "AND mm.id IS NULL " +
-            "AND (:cursor IS NULL OR m.id < :cursor) "+
-            "ORDER BY m.id DESC",
-            countQuery = "SELECT COUNT(m) FROM Mission m " +
-                    "JOIN m.store s " +
-                    "LEFT JOIN MemberMission mm ON mm.mission = m AND mm.member = :member " +
-                    "WHERE s.location.id = :locationId AND mm.id IS NULL")
-    Page<Mission> findHomeMissionList(@Param("member") Member member, @Param("locationId") Long locationId, @Param("cursor") Long lastId, Pageable pageable);
 
     @Query("SELECT COUNT(mm) FROM MemberMission mm "+
         "JOIN mm.mission m "+
@@ -40,3 +28,4 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
         "AND mm.status='COMPLETED' ")
     Integer countCompletedMissionByLocationId(@Param("member") Member member, @Param("locationId") Long locationId);
 }
+
