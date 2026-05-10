@@ -16,5 +16,11 @@ public class MissionReqDto {
         Long lastId,
         Integer size
     ){}
+
+    // 진행 중인 미션 목록 조회
+    public record GetOngoingMissionList(Long memberId,
+       Integer page, //몇 번째 페이지인지
+       Integer size //한 페이지에 담길 데이터 개수
+    ){}
 }
 

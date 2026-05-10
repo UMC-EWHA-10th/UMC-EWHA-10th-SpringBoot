@@ -49,4 +49,14 @@ public class MissionController {
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_COMPLETED, result);
     }
+
+    // 진행 중인 미션 조회
+    @PostMapping("/ongoing")
+    public ApiResponse<MissionResDto.MissionList> getOngoingMissionList(
+           @RequestBody MissionReqDto.GetOngoingMissionList request)
+    {
+        MissionResDto.MissionList result=missionService.getOngoingMissionList(request);
+
+        return ApiResponse.onSuccess(MissionSuccessCode.MISSION_CHECKED, result);
+    }
 }

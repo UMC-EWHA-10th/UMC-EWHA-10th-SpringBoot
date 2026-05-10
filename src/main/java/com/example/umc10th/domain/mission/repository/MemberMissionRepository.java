@@ -1,7 +1,6 @@
 package com.example.umc10th.domain.mission.repository;
 
 import com.example.umc10th.domain.member.entity.Member;
-import com.example.umc10th.domain.mission.entity.Mission;
 import com.example.umc10th.domain.mission.entity.mapping.MemberMission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +26,14 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
         "AND mm.member=:member "+
         "AND mm.status='COMPLETED' ")
     Integer countCompletedMissionByLocationId(@Param("member") Member member, @Param("locationId") Long locationId);
+
+    @Query(value="SELECT mm FROM MemberMission mm "+
+        "JOIN FETCH mm.mission m "+
+        "JOIN FETCH m.store s "+
+        "WHERE mm.member=:member AND mm.status='ONGOING' "+
+        "ORDER BY mm.createdAt DESC",
+        countQuery = "SELECT COUNT(mm) FROM MemberMission  mm "+
+                    "WHERE mm.member=:member AND mm.status='ONGOING'") // 전체 페이지 수 계산
+    Page<MemberMission> findAllByMemberAndOngoing(@Param("member") Member member, Pageable pageable);
 }
 

@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public enum MemberErrorCode {
+public enum MemberErrorCode implements BaseErrorCode {
 
     // 유저 조회
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND,
