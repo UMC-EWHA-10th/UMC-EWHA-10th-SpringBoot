@@ -23,7 +23,7 @@ public class MissionController {
         @AuthenticationPrincipal Member member,
         @ModelAttribute MissionReqDto.MissionSummary request
     ){
-        MissionResDto.MissionList result=missionService.missionSummary(member.getId(), request);
+        MissionResDto.MissionList result=missionService.missionSummary(member, request);
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_SUMMARIZED, result);
     }
@@ -34,7 +34,7 @@ public class MissionController {
             @AuthenticationPrincipal Member member,
             @ModelAttribute MissionReqDto.GetMissionList request
     ){
-        MissionResDto.MissionList result=missionService.getMissionList(member.getId(), request);
+        MissionResDto.MissionList result=missionService.getMissionList(member, request);
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_CHECKED, result);
     }
@@ -45,7 +45,7 @@ public class MissionController {
             @AuthenticationPrincipal Member member,
             @PathVariable Long memberMissionId
     ){
-        MissionResDto.CompleteMission result=missionService.completeMission(member.getId(), memberMissionId);
+        MissionResDto.CompleteMission result=missionService.completeMission(member, memberMissionId);
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_COMPLETED, result);
     }
