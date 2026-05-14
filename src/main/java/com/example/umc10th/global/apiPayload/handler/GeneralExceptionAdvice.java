@@ -41,7 +41,7 @@ public class GeneralExceptionAdvice {
         return ResponseEntity.status(code.getStatus())
                 .body(ApiResponse.onFailure(
                         code,
-                        e.getMessage()
+                        errorMessage
                 ));
     }
 }
