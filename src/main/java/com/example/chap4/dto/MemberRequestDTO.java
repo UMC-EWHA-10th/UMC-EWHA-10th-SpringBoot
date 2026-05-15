@@ -1,4 +1,4 @@
-package dto;
+package com.example.chap4.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package domain;
+package com.example.chap4.domain;
 
-import domain.common.BaseEntity;
+import com.example.chap4.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

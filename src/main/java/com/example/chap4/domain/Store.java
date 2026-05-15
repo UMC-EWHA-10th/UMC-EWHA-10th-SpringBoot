@@ -1,6 +1,6 @@
-package domain;
+package com.example.chap4.domain;
 
-import domain.common.BaseEntity;
+import com.example.chap4.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +23,6 @@ public class Store extends BaseEntity {
     private String category;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Mission> missionList = new ArrayList<>();
+    private List<com.example.chap4.domain.Mission> missionList = new ArrayList<>();
 }
 
