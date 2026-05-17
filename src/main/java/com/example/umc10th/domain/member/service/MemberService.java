@@ -1,14 +1,73 @@
 package com.example.umc10th.domain.member.service;
 
 import com.example.umc10th.domain.member.converter.MemberConverter;
+import com.example.umc10th.domain.member.dto.MemberReqDTO;
 import com.example.umc10th.domain.member.dto.MemberResDTO;
+import com.example.umc10th.domain.member.entity.Food;
 import com.example.umc10th.domain.member.entity.Member;
+import com.example.umc10th.domain.member.entity.Term;
+import com.example.umc10th.domain.member.entity.mapping.MemberFood;
+import com.example.umc10th.domain.member.entity.mapping.MemberTerm;
+import com.example.umc10th.domain.member.repository.FoodRepository;
+import com.example.umc10th.domain.member.repository.MemberRepository;
+import com.example.umc10th.domain.member.repository.TermRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
+    private final PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
+    private final FoodRepository foodRepository;
+    private final TermRepository termRepository;
+
     public MemberResDTO.GetInfo getInfo(Member member) {
         //엔티티 -> Dto
         return MemberConverter.toGetInfoResDTO(member);
     }
+
+    @Transactional
+    public MemberResDTO.Join join(MemberReqDTO.Join dto) {
+
+        //비밀번호 암호화
+        String encodedPassword=passwordEncoder.encode(dto.password());
+        //Dto->엔티티
+        Member newMember=MemberConverter.toMember(dto, encodedPassword);
+
+        //음식
+        List<Food> foodList=dto.favorFood().stream()
+                .map(foodName-> (Food) foodRepository.findByName(foodName)
+                        .orElseThrow(()->new IllegalArgumentException("존재하지 않는 음식 카테고리입니다.")))
+                .toList();
+        List<MemberFood> memberFoodList=MemberConverter.toMemberFoodList(foodList, newMember);
+
+        //약관
+        List<Term> allTerms=termRepository.findAll();
+        Map<Term, Boolean> termAgreementMap=allTerms.stream()
+                .collect(Collectors.toMap(term -> term, term -> switch (term.getName()){
+                    case AGE_OVER_14 -> dto.terms().age();
+                    case SERVICE_TERM     -> dto.terms().service();
+                    case PRIVACY_POLICY   -> dto.terms().privacy();
+                    case LOCATION_INFO    -> dto.terms().location();
+                    case MARKETING_CONSENT -> dto.terms().marketing();
+                    default -> false;
+        }));
+        List<MemberTerm> memberTermList=MemberConverter.toMemberTermList(termAgreementMap, newMember);
+
+        //DB 저장
+        Member savedMember=memberRepository.save(newMember);
+
+        //엔티티->Dto
+        return MemberConverter.toJoinResDto(savedMember);
+    }
 }
+

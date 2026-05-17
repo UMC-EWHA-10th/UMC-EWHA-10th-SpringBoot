@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TermName {
-    GE_OVER_14("만 14세 이상입니다."),
+    AGE_OVER_14("만 14세 이상입니다."),
     SERVICE_TERM("서비스 이용약관"),
     PRIVACY_POLICY("개인 정보 처리 방침"),
     LOCATION_INFO("위치정보 제공"),
