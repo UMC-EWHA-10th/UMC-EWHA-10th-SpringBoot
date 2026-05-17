@@ -8,6 +8,8 @@ import com.example.umc10th.domain.member.entity.Member;
 import com.example.umc10th.domain.member.entity.Term;
 import com.example.umc10th.domain.member.entity.mapping.MemberFood;
 import com.example.umc10th.domain.member.entity.mapping.MemberTerm;
+import com.example.umc10th.domain.member.exception.MemberException;
+import com.example.umc10th.domain.member.exception.code.FoodErrorCode;
 import com.example.umc10th.domain.member.repository.FoodRepository;
 import com.example.umc10th.domain.member.repository.MemberRepository;
 import com.example.umc10th.domain.member.repository.TermRepository;
@@ -16,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -45,8 +46,8 @@ public class MemberService {
 
         //음식
         List<Food> foodList=dto.favorFood().stream()
-                .map(foodName-> (Food) foodRepository.findByName(foodName)
-                        .orElseThrow(()->new IllegalArgumentException("존재하지 않는 음식 카테고리입니다.")))
+                .map(foodName-> foodRepository.findByName(foodName)
+                        .orElseThrow(()->new MemberException(FoodErrorCode.FOOD_CATEGORY_NOT_FOUND)))
                 .toList();
         List<MemberFood> memberFoodList=MemberConverter.toMemberFoodList(foodList, newMember);
 

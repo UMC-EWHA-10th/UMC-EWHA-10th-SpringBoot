@@ -39,7 +39,7 @@ public class MissionController {
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_CHECKED, result);
     }
-
+/*
     //미션 성공 누르기
     @PatchMapping("/{memberMissionId}")
     public ApiResponse<MissionResDto.CompleteMission> completeMission(
@@ -50,7 +50,7 @@ public class MissionController {
 
         return ApiResponse.onSuccess(MissionSuccessCode.MISSION_COMPLETED, result);
     }
-
+*/
     // 진행 중인 미션 조회
     @PostMapping("/ongoing")
     public ApiResponse<MissionResDto.MissionList> getOngoingMissionList(
