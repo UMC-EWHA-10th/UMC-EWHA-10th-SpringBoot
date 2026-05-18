@@ -1,5 +1,6 @@
 package com.example.umc10th_week4.domain.mission.controller;
 
+import com.example.umc10th_week4.domain.mission.dto.MissionReqDTO;
 import com.example.umc10th_week4.domain.mission.dto.MissionResDTO;
 import com.example.umc10th_week4.domain.mission.enums.MissionStatus;
 import com.example.umc10th_week4.domain.mission.service.MissionService;
@@ -18,12 +19,11 @@ public class MissionController {
     // 내 미션 목록 (진행중 or 완료)
     @GetMapping("/my")
     public ApiResponse<MissionResDTO.MyMissionListResponse> getMyMissions(
-            @RequestParam Long userId,
-            @RequestParam MissionStatus status,
-            @RequestParam(defaultValue = "1") int page
+            @RequestBody MissionReqDTO.MyMissionRequest request,
+            @RequestParam MissionStatus status
     ) {
         return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS,
-                missionService.getMyMissions(userId, status, page));
+                missionService.getMyMissions(request.userId(), status, request.page() != null ? request.page() : 1));
     }
 
     // 홈 화면 - 지역별 미션 목록
