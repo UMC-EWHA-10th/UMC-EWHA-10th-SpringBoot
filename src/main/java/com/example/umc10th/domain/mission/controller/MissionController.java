@@ -5,6 +5,7 @@ import com.example.umc10th.domain.mission.dto.MissionResDTO;
 import com.example.umc10th.domain.mission.exception.code.MissionSuccessCode;
 import com.example.umc10th.domain.mission.service.MissionService;
 import com.example.umc10th.global.apiPayload.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class MissionController {
     // 홈 화면: 현재 선택 지역에서 도전 가능한 미션 목록
     @PostMapping("/home")
     public ApiResponse<MissionResDTO.HomeMissionResultDTO> getHomeMissions(
-            @RequestBody MissionReqDTO.HomeMissionRequestDTO request
+            @Valid @RequestBody MissionReqDTO.HomeMissionRequestDTO request
     ) {
         MissionResDTO.HomeMissionResultDTO result =
                 missionService.getHomeMissions(request.getLocationId(), request.getPage());
@@ -26,13 +27,13 @@ public class MissionController {
         return ApiResponse.of(MissionSuccessCode.MISSION_LIST_SUCCESS, result);
     }
 
-    // 내가 진행중/진행완료한 미션 목록
+    // 내가 진행중인 미션 목록
     @PostMapping("/my")
-    public ApiResponse<MissionResDTO.MyMissionResultDTO> getMyMissions(
-            @RequestBody MissionReqDTO.MyMissionRequestDTO request
+    public ApiResponse<MissionResDTO.MyMissionResultDTO> getMyProgressMissions(
+            @Valid @RequestBody MissionReqDTO.MyMissionRequestDTO request
     ) {
         MissionResDTO.MyMissionResultDTO result =
-                missionService.getMyMissions(request.getMemberId(), request.getStatus(), request.getPage());
+                missionService.getMyProgressMissions(request.getMemberId(), request.getPage());
 
         return ApiResponse.of(MissionSuccessCode.MISSION_LIST_SUCCESS, result);
     }

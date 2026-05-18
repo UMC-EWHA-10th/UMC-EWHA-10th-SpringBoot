@@ -48,11 +48,15 @@ public class MissionService {
                 .build();
     }
 
-    public MissionResDTO.MyMissionResultDTO getMyMissions(Long memberId, MissionStatus status, Integer page) {
+    public MissionResDTO.MyMissionResultDTO getMyProgressMissions(Long memberId, Integer page) {
         int pageNumber = page == null ? 0 : page;
         PageRequest pageRequest = PageRequest.of(pageNumber, 10);
 
-        Page<MemberMission> missionPage = memberMissionRepository.findMyMissionsByStatus(memberId, status, pageRequest);
+        Page<MemberMission> missionPage = memberMissionRepository.findMyMissionsByStatus(
+                memberId,
+                MissionStatus.CHALLENGING,
+                pageRequest
+        );
 
         List<MissionResDTO.MyMissionDTO> missionDTOList = missionPage.stream()
                 .map(memberMission -> MissionResDTO.MyMissionDTO.builder()

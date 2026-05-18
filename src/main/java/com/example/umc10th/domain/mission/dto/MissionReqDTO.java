@@ -14,7 +14,6 @@ public class MissionReqDTO {
     @Getter
     public static class MyMissionRequestDTO {
         private Long memberId;
-        private MissionStatus status;
         private Integer page;
     }
 }
