@@ -1,5 +1,6 @@
 package com.example.umc10th_week4.domain.user.converter;
 
+import com.example.umc10th_week4.domain.user.dto.UserReqDTO;
 import com.example.umc10th_week4.domain.user.dto.UserResDTO;
 import com.example.umc10th_week4.domain.user.entity.User;
 
@@ -14,7 +15,7 @@ public class UserConverter {
                 .build();
     }
 
-    // ↓ 이거 추가!
+
     public static UserResDTO.MyPageResponse toMyPageResponse(User user) {
         return UserResDTO.MyPageResponse.builder()
                 .nickname(user.getNickname())
@@ -23,4 +24,28 @@ public class UserConverter {
                 .point(user.getPoint())
                 .build();
     }
+
+    public static User toUser(UserReqDTO.SignUpRequest request, String encodedPassword) {
+        return User.builder()
+                .email(request.getEmail())
+                .password(encodedPassword)
+                .name(request.getName())
+                .nickname(request.getNickname())
+                .gender(request.getGender())
+                .birth(request.getBirth())
+                .address(request.getAddress())
+                .phoneNumber(request.getPhoneNumber())
+                .build();
+    }
+
+    public static UserResDTO.SignUpResponse toSignUpResponse(User user) {
+        return UserResDTO.SignUpResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getName())
+                .build();
+    }
 }
+
+
+
