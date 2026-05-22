@@ -13,4 +13,14 @@ public class UserConverter {
                 .point(user.getPoint())
                 .build();
     }
+
+    // ↓ 이거 추가!
+    public static UserResDTO.MyPageResponse toMyPageResponse(User user) {
+        return UserResDTO.MyPageResponse.builder()
+                .nickname(user.getNickname())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .point(user.getPoint())
+                .build();
+    }
 }

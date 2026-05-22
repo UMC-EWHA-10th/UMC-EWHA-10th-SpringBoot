@@ -24,5 +24,13 @@ public class UserService {
 
         // Converter로 응답 DTO 만들어서 리턴
         return UserConverter.toUserInfoResponse(user);
+
+
+    }
+    // ↓ 이거 추가!
+    public UserResDTO.MyPageResponse getMyPage(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ProjectException(GeneralErrorCode.NOT_FOUND));
+        return UserConverter.toMyPageResponse(user);
     }
 }
