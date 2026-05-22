@@ -1,5 +1,4 @@
 package com.example.umc10th_week4.domain.review.entity;
-
 import com.example.umc10th_week4.domain.mission.entity.UserMission;
 import com.example.umc10th_week4.global.BaseEntity;
 import jakarta.persistence.*;
