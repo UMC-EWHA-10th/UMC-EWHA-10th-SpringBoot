@@ -16,7 +16,17 @@ public class MissionResDTO {
             LocalDateTime completedAt
     ) {}
 
-    // 내 미션 목록 1건
+    // 가게 내 미션 조회
+    @Builder
+    public record GetMission(
+            Long missionId,
+            Integer rewardPoint,
+            String missionCondition,
+            LocalDate deadline
+    ) {}
+
+
+    // 내 미션 목록 조회
     @Builder
     public record MyMissionPreview(
             Long missionId,
@@ -24,6 +34,15 @@ public class MissionResDTO {
             String missionCondition,
             Integer rewardPoint,
             String missionStatus      // ONGOING | DONE
+    ) {}
+
+    // 페이지네이션 틀
+    @Builder
+    public record Pagnation<T>(
+            List<T> data,
+            Boolean hasNext,
+            String nextCursor,
+            Integer pageSize
     ) {}
 
     // 내 미션 목록 응답 (커서 페이징)
@@ -60,5 +79,17 @@ public class MissionResDTO {
     @Builder
     public record MissionList(
             List<MyMissionPreview> missions
+    ) {}
+
+    // 진행중 미션 목록 응답 (오프셋 페이지네이션)
+    @Builder
+    public record OngoingMissionList(
+            List<MyMissionPreview> missions,
+            Integer page,
+            Integer size,
+            Long totalElements,
+            Integer totalPages,
+            boolean isFirst,
+            boolean isLast
     ) {}
 }

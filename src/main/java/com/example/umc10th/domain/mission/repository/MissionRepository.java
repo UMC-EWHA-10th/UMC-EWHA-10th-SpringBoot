@@ -1,7 +1,10 @@
 package com.example.umc10th.domain.mission.repository;
 
 import com.example.umc10th.domain.mission.entity.Mission;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +13,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MissionRepository extends JpaRepository<Mission, Long> {
+
+    /**
+     * 가게 내 미션들 조회
+     */
+    Page<Mission> findAllByStore_Id(Long storeId, PageRequest pageRequest);
+
+    Slice<Mission> findByStore_IdOrderByIdDesc(Long storeId, Pageable pageable);
+
+    Slice<Mission> findByStore_IdAndIdLessThanOrderByIdDesc(Long storeId, Long idCursor, Pageable pageable);
 
     /**
      * 홈 화면: 선택한 지역에서 도전 가능한 미션 (커서 페이징)

@@ -24,6 +24,11 @@ public enum MissionErrorCode implements BaseErrorCode {
             "STORE404_1",
             "해당 가게를 찾을 수 없습니다."
     ),
+    QUERY_NOT_VALID(
+            HttpStatus.BAD_REQUEST,
+            "MISSION400_1",
+            "유효하지 않은 query 파라미터입니다."
+    ),
     ;
 
     private final HttpStatus status;

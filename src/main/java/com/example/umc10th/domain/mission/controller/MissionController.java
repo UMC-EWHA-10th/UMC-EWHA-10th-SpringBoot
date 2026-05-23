@@ -17,6 +17,28 @@ public class MissionController {
 
     private final MissionService missionService;
 
+    // 가게 미션 생성
+    @PostMapping("/v1/stores/{storeId}/missions")
+    public ApiResponse<Void> createMission(
+            @PathVariable Long storeId,
+            @RequestBody @Valid MissionReqDTO.CreateMission dto
+    ){
+        BaseSuccessCode code = MissionSuccessCode.CREATED;
+        return ApiResponse.onSuccess(code, missionService.createMission(storeId, dto));
+    }
+
+    // 가게 내 미션들 조회
+    @GetMapping("/v1/stores/{storeId}/missions")
+    public ApiResponse<MissionResDTO.Pagnation<MissionResDTO.GetMission>> getMissions(
+            @PathVariable Long storeId,
+            @RequestParam Integer pageSize,
+            @RequestParam String cursor,
+            @RequestParam String query
+    ){
+        BaseSuccessCode code = MissionSuccessCode.OK;
+        return ApiResponse.onSuccess(code, missionService.getMissions(storeId, pageSize, cursor, query));
+    }
+
     // 미션 성공
     @PatchMapping("/v1/missions/{mission_id}")
     public ApiResponse<MissionResDTO.CompleteMission> completeMission(
@@ -25,6 +47,15 @@ public class MissionController {
     ) {
         BaseSuccessCode code = MissionSuccessCode.OK;
         return ApiResponse.onSuccess(code, missionService.completeMission(missionId, dto));
+    }
+
+    // 내가 진행중인 미션 목록 — 오프셋 페이지네이션 (memberId는 Request Body)
+    @PostMapping("/v1/missions/ongoing")
+    public ApiResponse<MissionResDTO.OngoingMissionList> getOngoingMissionList(
+            @Valid @RequestBody MissionReqDTO.OngoingMissionList dto
+    ) {
+        BaseSuccessCode code = MissionSuccessCode.LIST_OK;
+        return ApiResponse.onSuccess(code, missionService.getOngoingMissionList(dto));
     }
 
     // 내 미션 목록 (진행중 / 완료) — 커서 페이징
