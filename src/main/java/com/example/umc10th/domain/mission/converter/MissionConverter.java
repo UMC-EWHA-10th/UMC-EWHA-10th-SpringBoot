@@ -16,7 +16,7 @@ public class MissionConverter {
                 .title(memberMission.getMission().getStore().getName()+"에서")
                 .content(memberMission.getMission().getContent())
                 .reward(memberMission.getMission().getPoint())
-                .status(memberMission.getStatus())
+                .status(String.valueOf(memberMission.getStatus()))
                 .build();
 
     }

@@ -12,10 +12,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageResDto<T> {
-    private List<T> reviewList;
+    private List<T> dataList;
     private Integer listSize; //이번 페이지 데이터 수
-    private Integer totalPage; //전체 페이지 수
-    private Long totalElements; //전체 페이지 데이터 수
+    private Integer totalPage; //전체 페이지 수, 오프셋
+    private Long totalElements; //전체 페이지 데이터 수, 오프셋
     private Boolean isFirst;
     private Boolean isLast;
+    private Long nextCursor; //커서
+    private Integer nextSubCursor; //별점순 정렬용, 커서
 }
