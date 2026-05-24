@@ -12,11 +12,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     //별점순(커서)
-    @Query("SELECT r From Review r "+
-            "WHERE r.member=:member "+
-            "AND(:laststarRating IS NULL OR (r.starRating<:lastStarRating) "+
-            "OR(r.starRating=:lastStarRating AND r.id<:lastId)) "+
-            "ORDER BY r.starRating DESC, r.id DESC")
+    @Query("""
+            SELECT r From Review r 
+            WHERE r.member=:member
+            AND(
+                        (:lastStarRating IS NULL OR r.starRating<:lastStarRating) 
+                        OR(r.starRating=:lastStarRating AND r.id<:lastId)
+                                    ) 
+            ORDER BY r.starRating DESC, r.id DESC
+                        """)
     Page<Review> findAllByMemberAndStarRatingCursor(Member member, Integer lastStarRating, Long lastId, Pageable pageable);
 
     //ID순(커서)
