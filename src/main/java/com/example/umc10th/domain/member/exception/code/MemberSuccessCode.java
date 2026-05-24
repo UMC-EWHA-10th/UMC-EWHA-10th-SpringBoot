@@ -17,8 +17,10 @@ public enum MemberSuccessCode implements BaseSuccessCode {
     // 회원가입
     SIGNED_UP(HttpStatus.OK,
             "MEMBER200_2",
-            "성공적으로 회원가입 되었습니다.")
-    ;
+            "성공적으로 회원가입 되었습니다."),
+
+    //로그인
+    LOGINED(HttpStatus.OK, "MEMBER200_3","성공적으로 로그인 되었습니다." );
 
     private final HttpStatus status;
     private final String code;
