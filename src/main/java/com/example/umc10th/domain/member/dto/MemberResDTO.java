@@ -11,5 +11,12 @@ public class MemberResDTO {
             String email,
             String phoneNumber,
             Integer point
-    ){}
+    ) {}
+
+    @Builder
+    public record SignUp(
+            Long id,
+            String email,
+            String name
+    ) {}
 }

@@ -14,6 +14,11 @@ public enum MemberErrorCode implements BaseErrorCode {
             "MEMBER404_1",
             "해당 유저를 찾을 수 없습니다."
     ),
+    MEMBER_ALREADY_EXISTS(
+            HttpStatus.CONFLICT,
+            "MEMBER409_1",
+            "이미 가입된 이메일입니다."
+    ),
     ;
 
     private final HttpStatus status;
