@@ -10,6 +10,8 @@ import com.example.umc10th.domain.mission.enums.Address;
 import com.example.umc10th.domain.review.entity.Review;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -20,7 +22,9 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "member")
 public class Member extends BaseEntity {
 
@@ -47,7 +51,7 @@ public class Member extends BaseEntity {
     @Column(name = "detail_address", nullable = false, length = 255)
     private String detailAddress;
 
-    @Column(name = "social_uid", nullable = false, length = 255)
+    @Column(name = "social_uid", length = 255)
     private String socialUid;
 
     @Enumerated(EnumType.STRING)
@@ -60,21 +64,36 @@ public class Member extends BaseEntity {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
+    @Column(name = "password", length = 255)
+    private String password;
+
     @Column(name = "phone_number", length = 11)
     private String phoneNumber;
 
-    @Column(name = "profile_url", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "profile_url", columnDefinition = "TEXT")
     private String profileUrl;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberFood> memberFoodList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberTerm> memberTermList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberMission> memberMissionList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviewList = new ArrayList<>();
+
+    public void addMemberFood(MemberFood memberFood) {
+        memberFoodList.add(memberFood);
+    }
+
+    public void addMemberTerm(MemberTerm memberTerm) {
+        memberTermList.add(memberTerm);
+    }
 }
