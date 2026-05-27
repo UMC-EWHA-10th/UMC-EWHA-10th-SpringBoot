@@ -5,4 +5,5 @@ import com.example.umc10th.domain.member.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     void deleteByName(String name);
+    java.util.Optional<Member> findByEmail(String email);
 }

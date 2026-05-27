@@ -60,6 +60,9 @@ public class Member extends BaseEntity {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
+    @Column(name = "password", length = 255)
+    private String password;
+
     @Column(name = "phone_number", length = 11)
     private String phoneNumber;
 
