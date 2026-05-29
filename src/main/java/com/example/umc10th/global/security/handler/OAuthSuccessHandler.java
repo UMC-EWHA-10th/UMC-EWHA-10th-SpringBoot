@@ -17,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
-import java.util.Map;
 
 @RequiredArgsConstructor
 public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
@@ -31,42 +30,19 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
             Authentication authentication
     ) throws IOException, ServletException {
         ObjectMapper objectMapper = new ObjectMapper();
+        BaseSuccessCode code = MemberSuccessCode.OK;
 
-        try {
-            BaseSuccessCode code = MemberSuccessCode.OK;
+        response.setContentType("application/json;charset=UTF-8");
+        response.setStatus(code.getStatus().value());
 
-            // Content-Type, Status 설정
-            response.setContentType("application/json;charset=UTF-8");
-            response.setStatus(code.getStatus().value());
+        OAuthMember member = (OAuthMember) authentication.getPrincipal();
+        String accessToken = jwtUtil.createAccessToken(new AuthMember(member.getMember()));
 
-            // authentication 파라미터에서 직접 꺼내기 (SecurityContextHolder 대신)
-            OAuthMember member = (OAuthMember) authentication.getPrincipal();
+        ApiResponse<MemberResDTO.Login> responseBody = ApiResponse.onSuccess(
+                code,
+                MemberConverter.toLogin(accessToken)
+        );
 
-            // 토큰 제작
-            String accessToken = jwtUtil.createAccessToken(new AuthMember(member.getMember()));
-
-            // 응답 통일 객체 래핑
-            ApiResponse<MemberResDTO.Login> responseBody = ApiResponse.onSuccess(
-                    code,
-                    MemberConverter.toLogin(accessToken)
-            );
-
-            // 응답 출력
-            objectMapper.writeValue(response.getOutputStream(), responseBody);
-
-        } catch (Exception e) {
-            // 디버깅용: 실제 예외 원인 출력
-            response.setContentType("application/json;charset=UTF-8");
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            objectMapper.writeValue(
-                    response.getOutputStream(),
-                    Map.of(
-                            "isSuccess", false,
-                            "code", "SUCCESS_HANDLER_ERROR",
-                            "message", e.getMessage() != null ? e.getMessage() : "알 수 없는 오류",
-                            "cause", e.getClass().getSimpleName()
-                    )
-            );
-        }
+        objectMapper.writeValue(response.getOutputStream(), responseBody);
     }
 }

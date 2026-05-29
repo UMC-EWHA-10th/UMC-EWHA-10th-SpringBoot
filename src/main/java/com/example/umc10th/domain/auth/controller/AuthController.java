@@ -5,6 +5,7 @@ import com.example.umc10th.domain.auth.dto.AuthResDTO;
 import com.example.umc10th.domain.auth.service.AuthService;
 import com.example.umc10th.global.apiPayload.ApiResponse;
 import com.example.umc10th.global.apiPayload.code.GeneralSuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ApiResponse<AuthResDTO.Login> login(
-            @RequestBody AuthReqDTO.Login dto
+            @RequestBody @Valid AuthReqDTO.Login dto
     ) {
         return ApiResponse.onSuccess(GeneralSuccessCode.OK, authService.login(dto));
     }

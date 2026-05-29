@@ -32,7 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
             SocialType socialType,
             String username
     ) throws UsernameNotFoundException {
-        // DB에서 기존 회원 정보 조회 & 인증 객체 생성
+        // 일반 로그인(NONE)은 email로 조회, 소셜 로그인은 socialUid로 조회
+        if (socialType == SocialType.NONE) {
+            return loadUserByUsername(username);
+        }
         Member member = memberRepository.findBySocialTypeAndSocialUid(socialType, username)
                 .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
         return new AuthMember(member);
