@@ -13,6 +13,7 @@ import com.example.umc10th.domain.member.exception.code.MemberErrorCode;
 import com.example.umc10th.domain.member.repository.FoodRepository;
 import com.example.umc10th.domain.member.repository.MemberRepository;
 import com.example.umc10th.domain.member.repository.TermRepository;
+import com.example.umc10th.global.security.entity.AuthMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,13 @@ public class MemberService {
     private final TermRepository termRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public MemberResDTO.GetInfo getInfo(MemberReqDTO.GetInfo dto) {
-        Long memberId = dto.id();
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
-        return MemberConverter.toGetInfo(member);
+
+    // 마이페이지
+    public MemberResDTO.GetInfo getInfo(
+            AuthMember member
+    ) {
+        // 컨버터를 이용해서 응답 DTO 생성 & return
+        return MemberConverter.toGetInfo(member.getMember());
     }
 
     @Transactional

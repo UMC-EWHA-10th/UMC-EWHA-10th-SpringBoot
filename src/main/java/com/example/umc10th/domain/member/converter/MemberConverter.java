@@ -4,6 +4,7 @@ import com.example.umc10th.domain.member.dto.MemberReqDTO;
 import com.example.umc10th.domain.member.dto.MemberResDTO;
 import com.example.umc10th.domain.member.entity.Member;
 import com.example.umc10th.domain.member.enums.SocialType;
+import com.example.umc10th.global.security.dto.OAuthDTO;
 
 public class MemberConverter {
 
@@ -37,6 +38,24 @@ public class MemberConverter {
                 .id(member.getId())
                 .email(member.getEmail())
                 .name(member.getName())
+                .build();
+    }
+
+    // OAuth 회원가입용
+    public static Member toMember(OAuthDTO dto) {
+        return Member.builder()
+                .name(dto.getName())
+                .email(dto.getSocialEmail())
+                .socialUid(dto.getSocialUid())
+                .socialType(dto.getSocialType())
+                .point(0)
+                .build();
+    }
+
+    // OAuth 로그인 응답용
+    public static MemberResDTO.Login toLogin(String accessToken) {
+        return MemberResDTO.Login.builder()
+                .accessToken(accessToken)
                 .build();
     }
 }

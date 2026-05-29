@@ -19,4 +19,9 @@ public class MemberResDTO {
             String email,
             String name
     ) {}
+
+    @Builder
+    public record Login(
+            String accessToken
+    ) {}
 }

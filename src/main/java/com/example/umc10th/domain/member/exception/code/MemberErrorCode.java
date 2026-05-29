@@ -19,6 +19,11 @@ public enum MemberErrorCode implements BaseErrorCode {
             "MEMBER409_1",
             "이미 가입된 이메일입니다."
     ),
+    NOT_SUPPORT_SOCIAL_PROVIDER(
+            HttpStatus.BAD_REQUEST,
+            "MEMBER400_1",
+            "지원하지 않는 소셜 로그인입니다."
+    ),
     ;
 
     private final HttpStatus status;

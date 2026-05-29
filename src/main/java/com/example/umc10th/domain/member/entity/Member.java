@@ -32,23 +32,23 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 5)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'NONE'")
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private Gender gender;
 
-    @Column(name = "birth", nullable = false)
+    @Column(name = "birth")
     private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'NONE'")
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private Address address;
 
-    @Column(name = "detail_address", nullable = false, length = 255)
+    @Column(name = "detail_address", length = 255)
     private String detailAddress;
 
     @Column(name = "social_uid", length = 255)
@@ -61,7 +61,7 @@ public class Member extends BaseEntity {
     @Column(name = "point", nullable = false)
     private Integer point;
 
-    @Column(name = "email", nullable = false, length = 50)
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @Column(name = "password", length = 255)
