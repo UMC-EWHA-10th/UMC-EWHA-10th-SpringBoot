@@ -14,7 +14,9 @@ public enum ErrorStatus implements BaseErrorCode {
     _UNAUTHORIZED("COMMON401", "인증이 필요합니다."),
     _FORBIDDEN("COMMON403", "접근 권한이 없습니다."),
 
-    MEMBER_EMAIL_ALREADY_EXISTS("MEMBER400_1", "이미 존재하는 이메일입니다.");
+    MEMBER_EMAIL_ALREADY_EXISTS("MEMBER400_1", "이미 존재하는 이메일입니다."),
+    MEMBER_NOT_FOUND("MEMBER404_1", "존재하지 않는 회원입니다."),
+    MEMBER_LOGIN_FAILED("MEMBER401_1", "이메일 또는 비밀번호가 올바르지 않습니다.");
 
     private final String code;
     private final String message;

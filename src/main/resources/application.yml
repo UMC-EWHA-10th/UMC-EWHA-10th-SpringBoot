@@ -3,16 +3,21 @@ spring:
     name: umc10th
 
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/umc10th
+    username: root
+    password: moonyesque1!
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
-  h2:
-    console:
-      enabled: true
+jwt:
+  token:
+    secretKey: 1234567890123456789012345678901234567890123456789012345678901234
+    expiration:
+      access: 1800000

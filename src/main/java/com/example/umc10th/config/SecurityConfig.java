@@ -1,37 +1,41 @@
 package com.example.umc10th.config;
 
+import com.example.umc10th.domain.member.auth.CustomUserDetailsService;
 import com.example.umc10th.global.security.CustomAccessDeniedHandler;
 import com.example.umc10th.global.security.CustomAuthenticationEntryPoint;
+import com.example.umc10th.global.security.JwtAuthFilter;
+import com.example.umc10th.global.security.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtUtil jwtUtil;
+    private final CustomUserDetailsService customUserDetailsService;
+
     private final String[] allowUris = {
-            // Swagger 허용
             "/swagger-ui/**",
             "/swagger-ui.html",
             "/swagger-resources/**",
             "/v3/api-docs/**",
 
-            // 회원가입 Public API
             "/api/v1/auth/signup",
+            "/api/v1/auth/login",
 
-            // Form Login 관련
-            "/login",
-            "/logout",
-
-            // 정적 리소스
             "/css/**",
             "/js/**",
             "/images/**",
@@ -42,27 +46,30 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(allowUris).permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .usernameParameter("email")
-                        .passwordParameter("password")
-                        .defaultSuccessUrl("/swagger-ui/index.html", true)
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll()
-                )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(customAuthenticationEntryPoint())
                         .accessDeniedHandler(customAccessDeniedHandler())
+                )
+                .addFilterBefore(
+                        jwtAuthFilter(),
+                        UsernamePasswordAuthenticationFilter.class
                 );
 
         return http.build();
+    }
+
+    @Bean
+    public JwtAuthFilter jwtAuthFilter() {
+        return new JwtAuthFilter(jwtUtil, customUserDetailsService);
     }
 
     @Bean
