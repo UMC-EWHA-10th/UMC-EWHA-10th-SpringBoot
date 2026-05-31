@@ -14,7 +14,7 @@ public class UserResDTO {
         private Integer point;
     }
 
-    // ↓ 이거 추가!
+
     @Getter
     @Builder
     public static class MyPageResponse {
@@ -23,4 +23,13 @@ public class UserResDTO {
         private String phoneNumber;
         private Integer point;
     }
+
+    @Getter
+    @Builder
+    public static class SignUpResponse {
+        private Long id;
+        private String email;
+        private String name;
+    }
 }
+
