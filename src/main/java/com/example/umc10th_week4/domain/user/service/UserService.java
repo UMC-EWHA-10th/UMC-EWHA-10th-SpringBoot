@@ -31,6 +31,10 @@ public class UserService {
     }
 
     public UserResDTO.SignUpResponse signUp(UserReqDTO.SignUpRequest request) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new ProjectException(GeneralErrorCode.DUPLICATE_EMAIL);
+        }
+
         String encodedPassword = passwordEncoder.encode(request.getPassword());
         User user = UserConverter.toUser(request, encodedPassword);
         userRepository.save(user);

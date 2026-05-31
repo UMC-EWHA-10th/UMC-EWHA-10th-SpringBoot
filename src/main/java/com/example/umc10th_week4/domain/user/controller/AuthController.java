@@ -5,6 +5,7 @@ import com.example.umc10th_week4.domain.user.dto.UserResDTO;
 import com.example.umc10th_week4.domain.user.service.UserService;
 import com.example.umc10th_week4.global.apiPayload.ApiResponse;
 import com.example.umc10th_week4.global.apiPayload.code.GeneralSuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     public ApiResponse<UserResDTO.SignUpResponse> signUp(
-            @RequestBody UserReqDTO.SignUpRequest request
+            @RequestBody @Valid UserReqDTO.SignUpRequest request
     ) {
         UserResDTO.SignUpResponse result = userService.signUp(request);
         return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, result);
