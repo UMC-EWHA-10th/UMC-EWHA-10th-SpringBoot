@@ -23,4 +23,11 @@ public class AuthController {
         UserResDTO.SignUpResponse result = userService.signUp(request);
         return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, result);
     }
+    @PostMapping("/login")
+    public ApiResponse<UserResDTO.LoginResponse> login(
+            @RequestBody @Valid UserReqDTO.LoginRequest request
+    ) {
+        UserResDTO.LoginResponse result = userService.login(request);
+        return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, result);
+    }
 }

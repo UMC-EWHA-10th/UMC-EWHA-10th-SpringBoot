@@ -5,7 +5,9 @@ import com.example.umc10th_week4.domain.user.dto.UserResDTO;
 import com.example.umc10th_week4.domain.user.service.UserService;
 import com.example.umc10th_week4.global.apiPayload.ApiResponse;
 import com.example.umc10th_week4.global.apiPayload.code.GeneralSuccessCode;
+import com.example.umc10th_week4.global.security.AuthMember;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,5 +31,13 @@ public class UserContoller {
     ) {
         return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS,
                 userService.getMyPage(userId));
+    }
+
+    @GetMapping("/me")
+    public ApiResponse<UserResDTO.MyPageResponse> getMyInfo(
+            @AuthenticationPrincipal AuthMember authMember
+    ) {
+        return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS,
+                userService.getMyPage(authMember.getUser().getId()));
     }
 }

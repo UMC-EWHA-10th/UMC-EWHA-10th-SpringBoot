@@ -31,5 +31,11 @@ public class UserResDTO {
         private String email;
         private String name;
     }
+
+    @Getter
+    @Builder
+    public static class LoginResponse {
+        private String accessToken;
+    }
 }
 

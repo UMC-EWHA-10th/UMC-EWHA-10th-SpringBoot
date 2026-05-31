@@ -45,6 +45,11 @@ public class UserConverter {
                 .name(user.getName())
                 .build();
     }
+    public static UserResDTO.LoginResponse toLoginResponse(String accessToken) {
+        return UserResDTO.LoginResponse.builder()
+                .accessToken(accessToken)
+                .build();
+    }
 }
 
 
