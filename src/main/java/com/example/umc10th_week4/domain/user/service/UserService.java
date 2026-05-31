@@ -12,6 +12,8 @@ import com.example.umc10th_week4.domain.user.repository.UserRepository;
 import com.example.umc10th_week4.domain.user.repository.UserTermRepository;
 import com.example.umc10th_week4.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc10th_week4.global.exception.ProjectException;
+import com.example.umc10th_week4.global.security.AuthMember;
+import com.example.umc10th_week4.global.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final FoodPreferenceRepository foodPreferenceRepository; // ← 추가
     private final UserTermRepository userTermRepository;
+    private final JwtUtil jwtUtil;
     public UserResDTO.UserInfoResponse getUserInfo(UserReqDTO.UserInfoRequest request) {
         User user = userRepository.findById(request.getId())
                 .orElseThrow(() -> new ProjectException(GeneralErrorCode.NOT_FOUND));
@@ -73,5 +76,22 @@ public class UserService {
         userTermRepository.saveAll(userTerms);
 
         return UserConverter.toSignUpResponse(user);
+    }
+
+    public UserResDTO.LoginResponse login(UserReqDTO.LoginRequest request) {
+
+        // 이메일로 유저 조회
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new ProjectException(GeneralErrorCode.NOT_FOUND));
+
+        // 비밀번호 검증
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new ProjectException(GeneralErrorCode.UNAUTHORIZED);
+        }
+
+        // JWT 토큰 발급
+        String accessToken = jwtUtil.createAccessToken(new AuthMember(user));
+
+        return UserConverter.toLoginResponse(accessToken);
     }
 }

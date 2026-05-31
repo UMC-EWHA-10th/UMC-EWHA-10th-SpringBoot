@@ -5,6 +5,7 @@ import com.example.umc10th_week4.domain.user.enums.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -51,5 +52,22 @@ public class UserReqDTO {
         private boolean privacy;    // 개인정보 처리방침 (필수)
         private boolean location;   // 위치정보 제공 (선택)
         private boolean marketing;  // 마케팅 수신 동의 (선택)
+    }
+
+    @Getter
+    public static class LoginRequest {
+
+        @NotBlank(message = "이메일은 빈칸일 수 없습니다.")
+        @Email(message = "이메일 형식이 올바르지 않습니다.")
+        private String email;
+
+        @NotBlank(message = "비밀번호는 빈칸일 수 없습니다.")
+        private String password;
+    }
+
+    @Getter
+    @Builder
+    public static class LoginResponse {
+        private String accessToken;
     }
 }
