@@ -24,4 +24,14 @@ public class AuthController {
 
         return ApiResponse.onSuccess(result);
     }
+
+    // 로그인 API - Public API, JWT 발급
+    @PostMapping("/login")
+    public ApiResponse<AuthResDTO.LoginResultDTO> login(
+            @Valid @RequestBody AuthReqDTO.LoginRequestDTO request
+    ) {
+        AuthResDTO.LoginResultDTO result = authService.login(request);
+
+        return ApiResponse.onSuccess(result);
+    }
 }

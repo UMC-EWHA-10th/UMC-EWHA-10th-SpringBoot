@@ -6,6 +6,6 @@ public class MemberReqDTO {
 
     @Getter
     public static class MyPageRequestDTO {
-        private Long id;
+        private Long memberId;
     }
 }

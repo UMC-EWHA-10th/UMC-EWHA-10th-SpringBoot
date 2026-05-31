@@ -8,8 +8,8 @@ public class MemberResDTO {
     @Getter
     @Builder
     public static class MyPageResultDTO {
-        private String name;
-        private String profileUrl;
+        private Long memberId;
+        private String nickname;
         private String email;
         private String phoneNumber;
         private Integer point;

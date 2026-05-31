@@ -12,4 +12,13 @@ public class AuthResDTO {
         private String email;
         private String nickname;
     }
+
+    @Getter
+    @Builder
+    public static class LoginResultDTO {
+        private Long memberId;
+        private String email;
+        private String nickname;
+        private String accessToken;
+    }
 }
