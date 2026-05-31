@@ -20,8 +20,12 @@ public class Member extends BaseEntity {
     private String nickname;
 
     // 이메일
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
+
+    // 비밀번호
+    @Column(nullable = false, length = 100)
+    private String password;
 
     // 휴대폰 번호
     @Column(length = 20)
