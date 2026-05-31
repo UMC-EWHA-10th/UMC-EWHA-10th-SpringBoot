@@ -1,6 +1,7 @@
 package com.example.umc10th.domain.mission.repository;
 
 import com.example.umc10th.domain.mission.entity.mapping.MemberMission;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,6 +29,26 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
             @Param("isComplete") Boolean isComplete,
             @Param("cursorPoint") Integer cursorPoint,
             @Param("cursorId") Long cursorId,
+            Pageable pageable
+    );
+
+    /**
+     * 내가 진행중인 미션 목록 (오프셋 페이지네이션)
+     * 정렬: mission.id DESC (최근 도전 순)
+     */
+    @Query(
+            value = "SELECT mm FROM MemberMission mm " +
+                    "JOIN FETCH mm.mission mi " +
+                    "JOIN FETCH mi.store s " +
+                    "WHERE mm.member.id = :memberId " +
+                    "AND mm.isComplete = false " +
+                    "ORDER BY mi.id DESC",
+            countQuery = "SELECT COUNT(mm) FROM MemberMission mm " +
+                    "WHERE mm.member.id = :memberId " +
+                    "AND mm.isComplete = false"
+    )
+    Page<MemberMission> findOngoingMissionsByMemberId(
+            @Param("memberId") Long memberId,
             Pageable pageable
     );
 }
