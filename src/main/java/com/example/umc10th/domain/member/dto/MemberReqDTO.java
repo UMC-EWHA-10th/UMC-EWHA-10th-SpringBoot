@@ -9,11 +9,15 @@ public class MemberReqDTO {
 
     // 회원 가입
     public record Join(
+            String email,
+            String password,
             Terms terms,
             String name,
             Gender gender,
             String birth,
             String address,
+            String detailAddress,
+            String phoneNumber,
             List<String> favorFood
     ) {
     }

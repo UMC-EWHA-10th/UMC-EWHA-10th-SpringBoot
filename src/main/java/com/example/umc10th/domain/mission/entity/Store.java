@@ -1,8 +1,6 @@
 package com.example.umc10th.domain.mission.entity;
 
 import com.example.umc10th.domain.member.entity.Food;
-import com.example.umc10th.domain.member.entity.mapping.MemberFood;
-import com.example.umc10th.domain.mission.entity.mapping.MemberMission;
 import com.example.umc10th.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
