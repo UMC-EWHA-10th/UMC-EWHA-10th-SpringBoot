@@ -10,9 +10,7 @@ import com.example.umc10th.domain.member.entity.mapping.MemberFood;
 import com.example.umc10th.domain.member.entity.mapping.MemberTerm;
 import com.example.umc10th.domain.member.exception.MemberException;
 import com.example.umc10th.domain.member.exception.code.FoodErrorCode;
-import com.example.umc10th.domain.member.repository.FoodRepository;
-import com.example.umc10th.domain.member.repository.MemberRepository;
-import com.example.umc10th.domain.member.repository.TermRepository;
+import com.example.umc10th.domain.member.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final FoodRepository foodRepository;
     private final TermRepository termRepository;
+    private final MemberFoodRepository memberFoodRepository;
+    private final MemberTermRepository memberTermRepository;
 
     public MemberResDTO.GetInfo getInfo(Member member) {
         //엔티티 -> Dto
@@ -66,6 +66,8 @@ public class MemberService {
 
         //DB 저장
         Member savedMember=memberRepository.save(newMember);
+        memberFoodRepository.saveAll(memberFoodList);
+        memberTermRepository.saveAll(memberTermList);
 
         //엔티티->Dto
         return MemberConverter.toJoinResDto(savedMember);

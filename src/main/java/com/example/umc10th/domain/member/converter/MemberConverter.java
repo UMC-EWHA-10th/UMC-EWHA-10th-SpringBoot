@@ -29,12 +29,12 @@ public class MemberConverter {
     }
 
     // MemberReqDto.Join->엔티티
-    public static Member toMember(MemberReqDTO.Join dto, String encodedPasssword){
+    public static Member toMember(MemberReqDTO.Join dto, String encodedPassword){
         LocalDate birthDate= LocalDate.parse(dto.birth());
 
         return Member.builder()
                 .email(dto.email())
-                .password(encodedPasssword)
+                .password(encodedPassword)
                 .name(dto.name())
                 .gender(dto.gender())
                 .birth(birthDate)
