@@ -30,7 +30,7 @@ public class AuthController {
 
     //로그인
     @PostMapping("/login")
-    public ApiResponse<MemberResDTO.Login> Join(
+    public ApiResponse<MemberResDTO.Login> Login(
             @RequestBody MemberReqDTO.Login dto)
     {
         BaseSuccessCode code= MemberSuccessCode.LOGINED;
