@@ -3,7 +3,6 @@ package com.example.umc10th.domain.member.dto;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class MemberResDTO {
 
@@ -25,4 +24,13 @@ public class MemberResDTO {
             LocalDateTime createdAt
     ){}
 
+    //로그인
+    @Builder
+    public record Login(
+            String accessToken
+    ){
+        public static Login from(String accessToken){
+            return new Login(accessToken);
+        }
+    }
 }

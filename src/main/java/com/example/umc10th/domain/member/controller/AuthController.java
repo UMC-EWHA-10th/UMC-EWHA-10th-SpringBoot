@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final MemberService memberService;
@@ -26,5 +26,14 @@ public class AuthController {
     {
         BaseSuccessCode code= MemberSuccessCode.SIGNED_UP;
         return ApiResponse.onSuccess(code, memberService.join(dto));
+    }
+
+    //로그인
+    @PostMapping("/login")
+    public ApiResponse<MemberResDTO.Login> Login(
+            @RequestBody MemberReqDTO.Login dto)
+    {
+        BaseSuccessCode code= MemberSuccessCode.LOGINED;
+        return ApiResponse.onSuccess(code, memberService.login(dto));
     }
 }

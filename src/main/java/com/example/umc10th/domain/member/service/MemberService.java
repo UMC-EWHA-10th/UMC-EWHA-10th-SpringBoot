@@ -8,8 +8,15 @@ import com.example.umc10th.domain.member.entity.Member;
 import com.example.umc10th.domain.member.entity.Term;
 import com.example.umc10th.domain.member.entity.mapping.MemberFood;
 import com.example.umc10th.domain.member.entity.mapping.MemberTerm;
+import com.example.umc10th.domain.member.enums.FoodName;
 import com.example.umc10th.domain.member.exception.MemberException;
 import com.example.umc10th.domain.member.exception.code.FoodErrorCode;
+import com.example.umc10th.domain.member.exception.code.MemberErrorCode;
+import com.example.umc10th.domain.member.repository.FoodRepository;
+import com.example.umc10th.domain.member.repository.MemberRepository;
+import com.example.umc10th.domain.member.repository.TermRepository;
+import com.example.umc10th.global.security.entity.AuthMember;
+import com.example.umc10th.global.security.util.JwtUtil;
 import com.example.umc10th.domain.member.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,12 +35,13 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final FoodRepository foodRepository;
     private final TermRepository termRepository;
+    private final JwtUtil jwtUtil;
     private final MemberFoodRepository memberFoodRepository;
     private final MemberTermRepository memberTermRepository;
 
-    public MemberResDTO.GetInfo getInfo(Member member) {
+    public MemberResDTO.GetInfo getInfo(AuthMember member) {
         //엔티티 -> Dto
-        return MemberConverter.toGetInfoResDTO(member);
+        return MemberConverter.toGetInfoResDTO(member.getMember());
     }
 
     @Transactional
@@ -46,8 +54,12 @@ public class MemberService {
 
         //음식
         List<Food> foodList=dto.favorFood().stream()
-                .map(foodName-> foodRepository.findByName(foodName)
-                        .orElseThrow(()->new MemberException(FoodErrorCode.FOOD_CATEGORY_NOT_FOUND)))
+                .map(foodString-> {
+                    FoodName foodEnum = FoodName.valueOf(foodString);
+
+                    return foodRepository.findByName(foodEnum)
+                            .orElseThrow(() -> new MemberException(FoodErrorCode.FOOD_CATEGORY_NOT_FOUND));
+                })
                 .toList();
         List<MemberFood> memberFoodList=MemberConverter.toMemberFoodList(foodList, newMember);
 
@@ -71,6 +83,29 @@ public class MemberService {
 
         //엔티티->Dto
         return MemberConverter.toJoinResDto(savedMember);
+    }
+
+    @Transactional
+    public MemberResDTO.Login login(MemberReqDTO.Login dto) {
+
+        //이메일 확인
+        Member member=memberRepository.findByEmail(dto.email())
+                .orElseThrow(()->new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
+
+        //비밀번호 확인
+        if(!passwordEncoder.matches(dto.password(),member.getPassword())){
+            throw new MemberException(MemberErrorCode.INCORRECT_PASSWORD);
+        }
+
+        //member->authmember
+        AuthMember authMember=new AuthMember(member);
+
+        //accessToken 생성
+        String accessToken=jwtUtil.createAccessToken(authMember);
+
+        //토큰 반환
+        return MemberResDTO.Login.from(accessToken);
+
     }
 }
 
