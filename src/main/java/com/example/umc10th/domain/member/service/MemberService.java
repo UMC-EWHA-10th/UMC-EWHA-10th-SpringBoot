@@ -17,6 +17,7 @@ import com.example.umc10th.domain.member.repository.MemberRepository;
 import com.example.umc10th.domain.member.repository.TermRepository;
 import com.example.umc10th.global.security.entity.AuthMember;
 import com.example.umc10th.global.security.util.JwtUtil;
+import com.example.umc10th.domain.member.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,8 @@ public class MemberService {
     private final FoodRepository foodRepository;
     private final TermRepository termRepository;
     private final JwtUtil jwtUtil;
+    private final MemberFoodRepository memberFoodRepository;
+    private final MemberTermRepository memberTermRepository;
 
     public MemberResDTO.GetInfo getInfo(AuthMember member) {
         //엔티티 -> Dto
@@ -75,6 +78,8 @@ public class MemberService {
 
         //DB 저장
         Member savedMember=memberRepository.save(newMember);
+        memberFoodRepository.saveAll(memberFoodList);
+        memberTermRepository.saveAll(memberTermList);
 
         //엔티티->Dto
         return MemberConverter.toJoinResDto(savedMember);

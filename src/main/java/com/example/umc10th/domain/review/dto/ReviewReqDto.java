@@ -1,6 +1,7 @@
 package com.example.umc10th.domain.review.dto;
 
 import com.example.umc10th.domain.review.enums.ReviewSortType;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class ReviewReqDto {
             Long lastId,
             Integer lastStarRating,
             Integer size,
+            @NotNull
             ReviewSortType sortType//ID순, 별점순
     ){ }
 }

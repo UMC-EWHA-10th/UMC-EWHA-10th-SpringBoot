@@ -30,7 +30,7 @@ public class ReviewConverter {
     }
 
     //엔티티 -> ReviewResDto.Review
-    public static ReviewResDto.Review toReivewDto(Review review){
+    public static ReviewResDto.Review toReviewDto(Review review){
         return ReviewResDto.Review.builder()
                 .reviewId(review.getId())
                 .name(review.getMember().getName())
@@ -44,7 +44,7 @@ public class ReviewConverter {
     public static PageResDto<ReviewResDto.Review> toPageReviewDto(Page<Review> reviewPage){
         //엔티티 리스트 -> Dto 리스트
         List<ReviewResDto.Review> reviewList=reviewPage.getContent().stream()
-                .map(ReviewConverter::toReivewDto)
+                .map(ReviewConverter::toReviewDto)
                 .toList();
 
         //마지막 요소 가져오기(nextCursor)
