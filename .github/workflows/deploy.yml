@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - feat/belle-week4
+      - belle-week10
 
 jobs:
   build:
